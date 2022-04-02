@@ -1,9 +1,7 @@
 @extends('Frontend.Layouts.app')
-@section('app-content')
-    @extends('Frontend.Layouts.app')
 @section('title', 'Blog Project 2022| Login')
 @section('app-content')
-<section class="intro" style="background: #e9ecef">
+<section class="intro" style="background: #e9ecef; min-height: 70vh">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-12">
@@ -14,4 +12,3 @@
 </section>
 @endsection
 
-@endsection

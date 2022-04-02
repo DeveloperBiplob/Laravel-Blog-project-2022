@@ -116,5 +116,13 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item">
+        @auth('admin')
+        <form action="{{ route('admin.logout') }}" method="POST">
+            @csrf
+            <button class="btn btn-danger btn-xs" type="submit" style="margin-top: 7px">Logout</button>
+        </form>
+        @endauth
+      </li>
     </ul>
   </nav>

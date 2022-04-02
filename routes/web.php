@@ -21,4 +21,10 @@ Route::get('/dashboard', function () {
     return view('Frontend.Pages.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::prefix('admin')->middleware('auth:admin', 'custom_verify')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('Backend.index');
+    })->name('dashboard');
+});
+
 require __DIR__.'/auth.php';
