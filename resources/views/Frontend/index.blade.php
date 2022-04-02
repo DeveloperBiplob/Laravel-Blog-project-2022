@@ -1,10 +1,6 @@
 @extends('Frontend.Layouts.app')
 @section('title', 'Blog Project 2022')
 @section('app-content')
-    <!-- Header Section-->
-    @includeIf('Frontend.partials.header')
-    <!-- End Header Section-->
-
         <!-- Hero Section-->
         @includeIf('Frontend.partials.slider')
         <!-- Intro Section-->
@@ -181,6 +177,5 @@
                 </div>
             </div>
         </section>
-        <!-- Page Footer-->
-        @includeIf('Frontend.Partials.footer')
+
 @endsection

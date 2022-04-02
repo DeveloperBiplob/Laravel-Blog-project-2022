@@ -19,7 +19,7 @@
         <div class="container">
             <!-- Navbar Brand -->
             <div class="navbar-header d-flex align-items-center justify-content-between">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+                <!-- Navbar Brand --><a href="{{ route('home-page') }}" class="navbar-brand">Bootstrap Blog</a>
                 <!-- Toggle Button-->
                 <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
             </div>
@@ -36,7 +36,17 @@
                     </li>
                 </ul>
                 <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-                <ul class="langs navbar-text"><a href="#" class="active">Login</a><span>           </span><a href="#">Register</a></ul>
+
+                @if (auth()->user())
+                <ul class="langs navbar-text">
+                    <form action="{{ route('logout') }}" method="POST" style="margin: 0 10px">
+                        @csrf
+                        <button class="btn btn-primary btn-sm" type="submit">Logout</button>
+                    </form>
+                </ul>
+                @else
+                    <ul class="langs navbar-text"><a href="{{ route('login') }}" class="active">Login</a><span>           </span><a href="{{ route('register') }}">Register</a></ul>
+                @endif
             </div>
         </div>
     </nav>

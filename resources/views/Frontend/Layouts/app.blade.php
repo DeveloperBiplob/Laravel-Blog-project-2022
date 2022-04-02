@@ -29,8 +29,14 @@
 
     </head>
     <body>
+    <!-- Header Section-->
+        @includeIf('Frontend.partials.header')
+    <!-- End Header Section-->
         @yield('app-content')
-        <!-- JavaScript files-->
+
+    <!-- Page Footer-->
+            @includeIf('Frontend.Partials.footer')
+    <!-- JavaScript files-->
         <script src="{{ asset('Frontend') }}/vendor/jquery/jquery.min.js"></script>
         <script src="{{ asset('Frontend') }}/vendor/popper.js/umd/popper.min.js"> </script>
         <script src="{{ asset('Frontend') }}/vendor/bootstrap/js/bootstrap.min.js"></script>
