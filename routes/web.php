@@ -31,6 +31,7 @@ Route::prefix('admin')->middleware('auth:admin', 'custom_verify')->name('admin.'
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
+    Route::get('/face-category', [CategoryController::class, 'faceCategory'])->name('face-category');
     Route::resource('/category', CategoryController::class);
 });
 

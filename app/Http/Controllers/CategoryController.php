@@ -10,19 +10,28 @@ class CategoryController extends Controller
 {
     protected $category;
 
-    public function __construct(CategoryInterface $category)
-    {
-        $this->category = $category;
-    }
+    // public function __construct(CategoryInterface $category)
+    // {
+    //     $this->category = $category;
+    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function faceCategory(){
+
+        return Category::latest()->get();
+
+     }
+
+
     public function index()
     {
-        $categories = $this->category->getAllCategory();
-        return view('Backend.Pages.Category.index', compact('categories'));
+        // $categories = $this->category->getAllCategory();
+        // return view('Backend.Pages.Category.index', compact('categories'));
+        return view('Backend.Pages.Category.index');
     }
 
     /**
@@ -43,7 +52,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:categories,name', 'string', 'min:2', 'max:100']
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+            'slug' => $request->name,
+        ]);
+
+        return redirect()->route('admin.category.index');
     }
 
     /**

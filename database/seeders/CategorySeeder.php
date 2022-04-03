@@ -19,7 +19,8 @@ class CategorySeeder extends Seeder
 
         for($i = 0; $i < count($categories); $i++){
             Category::create([
-                'name' => $categories[$i]
+                'name' => $slug = $categories[$i],
+                'slug' => $slug
             ]);
         }
     }

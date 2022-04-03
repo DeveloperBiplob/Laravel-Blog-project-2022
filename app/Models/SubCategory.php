@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class SubCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug'];
+    protected $fillabel = ['category_id', 'name', 'slug'];
 
     public function setSlugAttribute($value)
     {
