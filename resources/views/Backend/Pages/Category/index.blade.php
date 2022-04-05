@@ -101,7 +101,8 @@
                 }
             })
         });
-// 
+
+        // Delete
 
         function notification(message = 'Data Save Successfully!'){
             return Swal.fire({
