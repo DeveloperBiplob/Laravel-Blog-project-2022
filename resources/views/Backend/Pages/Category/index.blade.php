@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h1>Manage Category</h1>
+                        <h1 id="manage_catetory">Manage Category</h1>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -103,6 +103,25 @@
         });
 
         // Delete
+
+        // let deleteRow = document.querySelector('#deleteRow');
+        // deleteRow.addEventListener('click', function(){
+        //     alert('Hello!');
+        // });
+
+        $('body').on('click', '#deleteRow', function (){
+
+            let slug = $(this).attr('data-id');
+            let base_url = window.location.origin;
+            let url = base_url + '/admin/category/' + slug;
+
+            axios.delete(url)
+            .then( (res) => {
+                getAllcategory();
+                notification('Category Delete Successfully!');
+            })
+        });
+
 
         function notification(message = 'Data Save Successfully!'){
             return Swal.fire({
