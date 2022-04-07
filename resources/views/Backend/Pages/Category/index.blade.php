@@ -41,6 +41,34 @@
             </div>
         </div>
     </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="" id="eidtForm">
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="hidden" class="form-control" id="edit_slug">
+                    <input type="text" class="form-control" id="edit_name">
+                    <span class="text-danger" id="catEditError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update Category" class="btn btn-success btn-block">
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @push('script')
@@ -122,6 +150,47 @@
             })
         });
 
+
+        //Edit
+
+        $('body').on('click', '#editRow', function(){
+            let slug = $(this).attr('data-id');
+            let url = window.location.origin + '/admin/category/' + slug;
+            let edit_name = document.querySelector('#edit_name');
+            let edit_slug = document.querySelector('#edit_slug');
+
+            axios.get(url)
+            .then((res) => {
+                let {data} = res
+                edit_name.value = data.name;
+                edit_slug.value = data.slug;
+            })
+        })
+
+        // Updata
+
+        $('body').on('submit', '#eidtForm', function(e){
+            e.preventDefault();
+
+            // let edit_slug = document.querySelector('#edit_slug');
+            let slug = edit_slug.value;
+            let url = window.location.origin + '/admin/category/' + slug;
+            let catEditError = document.querySelector('#catEditError');
+
+            axios.put(url, {
+                name: edit_name.value
+            })
+            .then((res) => {
+                $('#editModal').modal('toggle')
+                getAllcategory();
+                notification('Category Updated Successfully!');
+            })
+            .catch((err)=>{
+                if(err.response.data.errors.name){
+                    catEditError.innerHTML = err.response.data.errors.name[0]
+                }
+            })
+        })
 
         function notification(message = 'Data Save Successfully!'){
             return Swal.fire({

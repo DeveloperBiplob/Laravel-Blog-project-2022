@@ -71,9 +71,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -94,9 +94,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'min:2', 'max:100', "unique:categories,name,{$category->id}"]
+        ]);
+
+        $category->update([
+            'name' => $request->name
+        ]);
     }
 
     /**
