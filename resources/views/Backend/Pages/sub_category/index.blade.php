@@ -64,15 +64,25 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="" id="eidtForm">
+            <form id="editSubCategoryForm">
                 <div class="form-group">
-                    <label for="">Name</label>
-                    <input type="hidden" class="form-control" id="edit_slug">
-                    <input type="text" class="form-control" id="edit_name">
-                    <span class="text-danger" id="catEditError"></span>
+                    <label for="">Select Category</label>
+                    <select name="category" id="edit_category" class="form-control">
+                        <option value="">Select a Cateogry</option>
+                        @foreach ($categories as $category)
+                        <option id="option" value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger" id="editSubCatIdError"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update Category" class="btn btn-success btn-block">
+                    <label for="">Sub Category Name</label>
+                    <input type="hidden" name="" id="edit_sub_cat_slug">
+                    <input type="text" class="form-control" id="edit_name" placeholder="Enter a Sub Category Name">
+                    <span class="text-danger" id="editSubCatNameError"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">Update New Sub Category</button>
                 </div>
             </form>
         </div>
@@ -155,6 +165,99 @@
                 }
             })
         })
+
+        //Edit data
+        let editRow = document.querySelector('#editRow');
+        let edit_category = document.querySelector('#edit_category');
+        let edit_name = document.querySelector('#edit_name');
+        let edit_sub_cat_slug = document.querySelector('#edit_sub_cat_slug');
+        $('body').on('click', '#editRow', function(){
+            let slug = $(this).attr('data-id');
+            let url = base_url + '/admin/sub-category/' + slug;
+
+            axios.get(url)
+            .then((res) => {
+                edit_category.value = res.data.category_id;
+                edit_name.value = res.data.name;
+                edit_sub_cat_slug.value = res.data.slug;
+
+            })
+        })
+
+        //Update data
+
+        let editSubCategoryForm = document.querySelector('#editSubCategoryForm');
+
+        editSubCategoryForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            let url = base_url + '/admin/sub-category/' + edit_sub_cat_slug.value;
+            let edit_category = document.querySelector('#edit_category');
+            let edit_name = document.querySelector('#edit_name');
+
+            let editSubCatIdError = document.querySelector('#editSubCatIdError');
+            let editSubCatNameError = document.querySelector('#editSubCatNameError');
+
+
+            editSubCatIdError.innerHTML = '';
+            if(edit_category.value === ''){
+                editSubCatIdError.innerHTML = 'Field Must Be Not Empty!';
+                return null;
+            }
+            editSubCatNameError.innerHTML = '';
+            if(edit_name.value === ''){
+                editSubCatNameError.innerHTML = 'Field Must Be Not Empty!';
+                return null;
+            }
+
+            axios.put(url, {
+                category_id : edit_category.value,
+                name : edit_name.value
+            })
+            .then((res) => {
+                $('#editModal').modal('toggle');
+                getAllSubCategory();
+                notification('Data update Successfully!');
+            })
+            .catch((err) => {
+                if(err.response.data.errors.name){
+                    editSubCatNameError.innerHTML = err.response.data.errors.name[0];
+                }
+            })
+        })
+
+
+        //Delete data
+        let deleteRow = document.querySelector('#deleteRow')
+        $('body').on('click','#deleteRow',function(){
+            let slug = $(this).attr('data-id');
+            let url = base_url + '/admin/sub-category/' + slug;
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(url)
+                    .then((res) => {
+                        getAllSubCategory();
+                        notification('Delete Sub Category Successfully!');
+                    })
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                }
+            })
+
+        })
+
+
 
 
         function notification(message = 'Data Save Successfully!'){

@@ -59,9 +59,9 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SubCategory $subCategory)
     {
-        //
+        return $subCategory;
     }
 
     /**
@@ -82,9 +82,20 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SubCategory $subCategory)
     {
-        //
+        $request->validate([
+            'category_id' => ['required'],
+            'name' => ['required', 'string', 'min:2', 'max:100', "unique:sub_categories,name,$subCategory->id"],
+        ]);
+
+        $subCategory->update([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'slug' => $request->name
+        ]);
+
+        return true;
     }
 
     /**
@@ -93,8 +104,8 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubCategory $subCategory)
     {
-        //
+        $subCategory->delete();
     }
 }
