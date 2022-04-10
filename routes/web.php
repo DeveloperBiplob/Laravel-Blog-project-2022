@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::resource('sub-category', SubCategoryController::class);
     Route::get('fatch-sub-category', [SubCategoryController::class, 'fatchSubCategory'])->name('fatch-sub-category');
+
+    Route::resource('/post', PostController::class);
+    Route::get('/face-sub-category/{id}', [PostController::class, 'getSubCateogry'])->name('face-sub-category');
 });
 
 require __DIR__.'/auth.php';

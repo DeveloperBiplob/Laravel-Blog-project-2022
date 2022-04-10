@@ -23,7 +23,7 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('Backend') }}/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('Backend') }}/plugins/summernote/summernote-bs4.css">
+  {{-- <link rel="stylesheet" href="{{ asset('Backend') }}/plugins/summernote/summernote-bs4.css"> --}}
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   @stack('css')
@@ -57,7 +57,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('Backend') }}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="{{ asset('Backend') }}/plugins/summernote/summernote-bs4.min.js"></script>
+{{-- <script src="{{ asset('Backend') }}/plugins/summernote/summernote-bs4.min.js"></script> --}}
 <!-- overlayScrollbars -->
 <script src="{{ asset('Backend') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
