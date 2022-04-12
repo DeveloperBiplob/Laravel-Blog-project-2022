@@ -17,7 +17,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Name</label>
-                                <textarea name="name" class="form-control" rows="1" placeholder="Enter a Post Name"></textarea>
+                                <textarea id="name_field" name="name" class="form-control" rows="1" placeholder="Enter a Post Name"></textarea>
+                                <span id="NameError"></span>
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -139,6 +140,25 @@
         }else{
             sub_category_id.innerHTML = '<option value="">Select a Sub Category</>';
         }
+      })
+
+      let name_field = document.querySelector('#name_field');
+      let NameError = document.querySelector('#NameError');
+      name_field.addEventListener('focusout', (e)=>{
+        let name = name_field.value;
+        let url = `${base_url}/admin/check/name-exits-or-not/${name}`;
+
+        axios.get(url)
+        .then((res)=> {
+            if(res.data.flag === 'Exist'){
+                NameError.innerHTML = 'The Name is Not Available !';
+                NameError.classList = 'text-danger';
+            }else{
+                NameError.innerHTML = 'The Name is Available !';
+                NameError.classList = 'text-success';
+            }
+        })
+
       })
     </script>
 @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Action\File;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
@@ -50,7 +51,27 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        return 'Ok';
+       $file = $request->file('image');
+
+        $post = Post::create([
+            'name' => $request->name,
+            'slug' => $request->name,
+            'category_id' => $request->category_id,
+            'sub_cat_id' => $request->sub_category_id,
+            'description' => $request->description,
+            'image' => File::upload($file, 'Post')
+        ]);
+
+        if ($post) {
+            $post->tags()->sync($request->tags);
+            // Send mail to subscribers
+            // PostSubscriberMail::handle($post);
+            $this->notificationMessage();
+            return redirect()->route('admin.post.index');
+        } else {
+            return back();
+        }
+
     }
 
     /**
@@ -96,5 +117,33 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkNameExistOrNot($name)
+    {
+        $result = Post::whereName($name)->first();
+        if($result){
+            return response()->json([
+                'flag' => 'Exist'
+            ]);
+        }else{
+            return response()->json([
+                'flag' => 'Not_Exist'
+            ]);
+        }
+
+
+    }
+
+    public function postStatus($slug)
+    {
+        $post = Post::whereSlug($slug)->first();
+        if($post->status == 'Active'){
+            $post->update(['status' => 'Inactive']);
+        }else{
+            $post->update(['status' => 'Active']);
+        }
+
+        return redirect()->route('admin.post.index');
     }
 }

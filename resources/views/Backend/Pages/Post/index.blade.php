@@ -8,14 +8,16 @@
                 <a href="{{ route('admin.post.create') }}" class="btn btn-sm btn-primary float-right">Add New Post</a>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered text-center">
                     <tbody>
                         <tr>
                             <th>Sl</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th>category</th>
                             <th>Sub Category</th>
                             <th>View</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </tbody>
@@ -24,13 +26,19 @@
                         <tr>
                             <td>{{ $loop-> index + 1 }}</td>
                             <td>{{ $post->name }}</td>
+                            <td><img src="{{ asset($post->image) }}" alt="" width="100px"></td>
                             <td>{{ $post->category->name }}</td>
-                            <td>{{ $post->subCategory->name }}</td>
+                            <td>{{ $post->subCategory->name ?? '' }}</td>
                             <td>{{ $post->view }}</td>
                             <td>
-                                <a href="" class="btn btn-xs btn-primary">View</a>
-                                <a href="" class="btn btn-xs btn-primary">Edit</a>
-                                <a href="" class="btn btn-xs btn-primary">delete</a>
+                                <span class="badge badge-{{ $post->status == 'Active' ? 'success': 'danger' }} p-2">{{ $post->status == 'Active' ? 'Active': 'Inactive' }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.post-status', $post->slug) }}" id="postStatus" data-status="{{ $post->status }}" class="btn btn-sm btn-{{ $post->status == 'Active' ? 'success': 'danger' }} "><i class="fa fa-arrow-{{ $post->status == 'Active' ? 'up': 'down' }}"></i></a>
+
+                                <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                <a href="" class="btn btn-sm btn-info"><i class="fa fa-pen"></i></a>
+                                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -40,3 +48,10 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        const base_url = window.location.origin;
+
+    </script>
+@endpush

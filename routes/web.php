@@ -41,6 +41,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::resource('/post', PostController::class);
     Route::get('/face-sub-category/{id}', [PostController::class, 'getSubCateogry'])->name('face-sub-category');
+    Route::get('/check/name-exits-or-not/{name}', [PostController::class, 'checkNameExistOrNot']);
+    Route::get('/post-status/{slug}', [PostController::class, 'postStatus'])->name('post-status');
+
+
 });
 
 require __DIR__.'/auth.php';
