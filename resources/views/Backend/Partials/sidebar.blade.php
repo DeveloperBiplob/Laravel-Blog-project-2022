@@ -53,7 +53,7 @@
             </ul>
           </li> --}}
           <li class="nav-item">
-            <a href="{{ route('admin.category.index') }}" class="nav-link">
+            <a href="{{ route('admin.category.index') }}" class="nav-link {{ Route::is('admin.category.index') ? 'active': '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Category
@@ -62,7 +62,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.sub-category.index') }}" class="nav-link">
+            <a href="{{ route('admin.sub-category.index') }}" class="nav-link {{ Route::is('admin.sub-category.index') ? 'active': '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Sub Category
@@ -70,8 +70,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+          <li class="nav-item has-treeview {{ Route::is('admin.post.index') || Route::is('admin.post.create') ? 'menu-open': '' }}">
+            <a href="#" class="nav-link {{ Route::is('admin.post.index') || Route::is('admin.post.create') ? 'active': '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Post
@@ -80,13 +80,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.post.index') }}" class="nav-link active">
+                <a href="{{ route('admin.post.index') }}" class="nav-link {{ Route::is('admin.post.index') ? 'active': '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Post</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.post.create') }}" class="nav-link">
+                <a href="{{ route('admin.post.create') }}" class="nav-link {{ Route::is('admin.post.create') ? 'active': '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Psot</p>
                 </a>
