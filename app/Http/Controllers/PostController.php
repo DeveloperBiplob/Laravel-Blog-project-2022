@@ -91,9 +91,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $data = [];
+        $data['categories'] = Category::latest()->get();
+        $data['subCategories'] = SubCategory::latest()->get();
+        $data['tags'] = Tag::latest()->get();
+        $data['post'] = $post;
+        $data['postTags'] = $this->getIDByFunction($post->tags);
+        // $data['postTags'] = $post->tags;
+        return view('Backend.Pages.Post.edit', $data);
     }
 
     /**
@@ -103,9 +110,36 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // return dd($request->all());
+        if($request->has('image')){
+            $old_img = $post->image;
+            File::deleteFile($old_img);
+
+
+        $post->update([
+            'category_id' => $request->category_id,
+            'sub_cat_id' => $request->sub_category_id,
+            'name' => $request->name,
+            'slug' => $request->name,
+            'description' => $request->description,
+            'image' => File::upload($request->file('image'), 'Post'),
+        ]);
+
+
+        }else{
+            $post->update([
+                'category_id' => $request->category_id,
+                'sub_cat_id' => $request->sub_category_id,
+                'name' => $request->name,
+                'slug' => $request->name,
+                'description' => $request->description
+            ]);
+        }
+        $post->tags()->sync($request->tags);
+        $this->notificationMessage('Post Updated Successfully!');
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -114,9 +148,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $deletePost = $post->delete();
+        if($deletePost){
+            File::deleteFile($post->image);
+            $this->notificationMessage('Post Deleted Successfully!');
+            return back();
+        }
     }
 
     public function checkNameExistOrNot($name)
@@ -145,5 +184,15 @@ class PostController extends Controller
         }
 
         return redirect()->route('admin.post.index');
+    }
+
+    protected function getIDByFunction($items)
+    {
+        $ids = [];
+        foreach ($items as $id) {
+            $ids[] = $id->id;
+        }
+
+        return $ids;
     }
 }

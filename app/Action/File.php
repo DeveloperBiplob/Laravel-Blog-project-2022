@@ -13,4 +13,11 @@ class File
 
         return "storage/$path/" . $fileName;
     }
+
+    public static function deleteFile($file)
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
+    }
 }

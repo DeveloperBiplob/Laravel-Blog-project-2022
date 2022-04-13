@@ -37,8 +37,12 @@
                                 <a href="{{ route('admin.post-status', $post->slug) }}" id="postStatus" data-status="{{ $post->status }}" class="btn btn-sm btn-{{ $post->status == 'Active' ? 'success': 'danger' }} "><i class="fa fa-arrow-{{ $post->status == 'Active' ? 'up': 'down' }}"></i></a>
 
                                 <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                                <a href="" class="btn btn-sm btn-info"><i class="fa fa-pen"></i></a>
-                                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('admin.post.edit', $post->slug) }}" class="btn btn-sm btn-info"><i class="fa fa-pen"></i></a>
+                                <form action="{{ route('admin.post.destroy', $post->slug) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -52,6 +56,7 @@
 @push('script')
     <script>
         const base_url = window.location.origin;
+
 
     </script>
 @endpush

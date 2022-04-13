@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
     {
         if ($this->method() === 'POST') {
             return [
-                'name' => "required|unique:posts,name",
+                'name' => "required|unique:posts,name|max:100|min:5",
                 'category_id' => "required",
                 'sub_category_id' => "required",
                 'description' => "required|string",
@@ -34,7 +34,10 @@ class PostRequest extends FormRequest
         } else {
             return [
                 'name' => "required|unique:posts,name,{$this->post->id}",
-                'sub_cat_id' => "required",
+                'category_id' => "required",
+                'sub_category_id' => "required",
+                'description' => "required|string",
+                'image' => "mimes:png,jpg,jpeg",
             ];
         }
     }

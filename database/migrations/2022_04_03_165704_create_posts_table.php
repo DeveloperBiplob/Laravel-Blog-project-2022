@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('sub_cat_id')->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('name', 100)->unique();
+            $table->text('name')->unique();
             $table->string('slug', 100)->unique();
-            $table ->text('description');
+            $table ->longText('description');
             $table->string('image');
             $table->float('view')->default(0);
             $table->enum('status', ['Active', 'Inactive'])->default('Active');

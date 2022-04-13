@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function notificationMessage($type = 'success', $message = 'Data Save Successfully!')
+    public function notificationMessage($message = 'Data Save Successfully!', $type = 'success')
     {
         session()->flash('type' , $type);
         session()->flash('message' , $message);
