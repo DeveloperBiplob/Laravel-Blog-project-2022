@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/face-sub-category/{id}', [PostController::class, 'getSubCateogry'])->name('face-sub-category');
     Route::get('/check/name-exits-or-not/{name}', [PostController::class, 'checkNameExistOrNot']);
     Route::get('/post-status/{slug}', [PostController::class, 'postStatus'])->name('post-status');
+
+    Route::resource('website', WebsiteController::class);
 
 
 });

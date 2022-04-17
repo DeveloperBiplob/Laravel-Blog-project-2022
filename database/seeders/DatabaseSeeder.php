@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         Admin::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
         ]);
 
         $this->call([
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
             SubCategorySeeder::class,
             TagSeeder::class,
             PostSeeder::class,
+            WebsiteSeeder::class,
         ]);
     }
 }

@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('logo');
-            $table->string('address');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('facebook');
-            $table->string('instagram');
-            $table->string('twitter');
-            $table->string('behance');
+            $table->string('slug');
+            $table->string('logo')->nullable();
+            $table->string('address')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('behance')->nullable();
             $table->string('footer');
             $table->timestamps();
         });
