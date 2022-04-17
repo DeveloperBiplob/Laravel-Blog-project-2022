@@ -53,11 +53,18 @@
             </ul>
           </li> --}}
           <li class="nav-item">
+            <a href="{{ route('admin.slider.index') }}" class="nav-link {{ Route::is('admin.slider.index') ? 'active': '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Sliders
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.category.index') }}" class="nav-link {{ Route::is('admin.category.index') ? 'active': '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Category
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -66,7 +73,14 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Sub Category
-                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.tag.index') }}" class="nav-link {{ Route::is('admin.tag.index') ? 'active': '' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Tags
               </p>
             </a>
           </li>

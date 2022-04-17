@@ -52,8 +52,8 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
        $file = $request->file('image');
-
         $post = Post::create([
+            'author' => auth('admin')->user()->id,
             'name' => $request->name,
             'slug' => $request->name,
             'category_id' => $request->category_id,
@@ -119,6 +119,7 @@ class PostController extends Controller
 
 
         $post->update([
+            'author' => auth('admin')->user()->id,
             'category_id' => $request->category_id,
             'sub_cat_id' => $request->sub_category_id,
             'name' => $request->name,
@@ -130,6 +131,7 @@ class PostController extends Controller
 
         }else{
             $post->update([
+                'author' => auth('admin')->user()->id,
                 'category_id' => $request->category_id,
                 'sub_cat_id' => $request->sub_category_id,
                 'name' => $request->name,

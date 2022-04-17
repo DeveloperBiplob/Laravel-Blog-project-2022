@@ -2,37 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\User;
-use App\Repository\Category\CategoryInterface;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
-    protected $category;
-
-    // public function __construct(CategoryInterface $category)
-    // {
-    //     $this->category = $category;
-    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function fatchTag(){
 
-     public function faceCategory(){
-
-        return Category::latest()->get();
+        return Tag::latest()->get();
 
      }
 
 
     public function index()
     {
-        // $categories = $this->category->getAllCategory();
-        // return view('Backend.Pages.Category.index', compact('categories'));
-        return view('Backend.Pages.Category.index');
+        return view('Backend.Pages.Tags.index');
     }
 
     /**
@@ -54,15 +43,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'unique:categories,name', 'string', 'min:2', 'max:100']
+            'name' => ['required', 'unique:tags,name', 'string', 'min:2', 'max:100']
         ]);
 
-        Category::create([
+        Tag::create([
             'name' => $request->name,
             'slug' => $request->name,
         ]);
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
@@ -71,9 +60,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Tag  $tag)
     {
-        return $category;
+        return $tag;
     }
 
     /**
@@ -94,13 +83,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:2', 'max:100', "unique:categories,name,{$category->id}"]
+            'name' => ['required', 'string', 'min:2', 'max:100', "unique:tags,name,{$tag->id}"]
         ]);
 
-        $category->update([
+        $tag->update([
             'name' => $request->name,
             'slug' => $request->name
         ]);
@@ -112,8 +101,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
-        $category->delete();
+        $tag->delete();
     }
 }
