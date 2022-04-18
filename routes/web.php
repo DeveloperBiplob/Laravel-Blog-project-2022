@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\PostController;
@@ -54,6 +55,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/post-status/{slug}', [PostController::class, 'postStatus'])->name('post-status');
 
     Route::resource('website', WebsiteController::class);
+
+    Route::resource('about', AboutController::class);
 
 
 });

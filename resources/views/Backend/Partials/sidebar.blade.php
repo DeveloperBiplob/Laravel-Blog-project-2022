@@ -98,6 +98,15 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.about.index') }}"
+                        class="nav-link {{ Route::is('admin.about.index') ? 'active': '' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            About
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.website.index') }}"
                         class="nav-link {{ Route::is('admin.website.index') ? 'active': '' }}">
                         <i class="nav-icon fas fa-th"></i>

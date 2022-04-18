@@ -1,7 +1,7 @@
 @extends('Backend.Layouts.master')
 @section('title', 'Backend | Create New Post')
 @push('css')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+{{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> --}}
 @endpush
 @section('master-content')
     <section>
@@ -110,7 +110,7 @@
 @endsection
 
 @push('script')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
     <script>
       $('#description').summernote({
         placeholder: 'Enter a descripton in your psot',
