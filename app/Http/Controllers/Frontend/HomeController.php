@@ -3,13 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
+use App\Models\Post;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        return view('Frontend.Pages.home');
+        $data = [];
+        $dtata['sliders'] = Slider::latest()->get();
+        $dtata['about'] = About::first();
+        $dtata['posts'] = Post::latest()->take(5);
+        return view('Frontend.Pages.home', $data);
     }
 
     public function allPost()
