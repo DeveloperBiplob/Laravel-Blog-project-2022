@@ -1,3 +1,6 @@
+@php
+    $website = App\Models\Website::first();
+@endphp
 <header class="header">
     <!-- Main Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -19,7 +22,11 @@
         <div class="container">
             <!-- Navbar Brand -->
             <div class="navbar-header d-flex align-items-center justify-content-between">
-                <!-- Navbar Brand --><a href="{{ route('home-page') }}" class="navbar-brand">Bootstrap Blog</a>
+                @if ($website->logo)
+                <img width="200px" src="{{ asset($website->logo) }}" alt="">
+                @else
+                <!-- Navbar Brand --><a href="{{ route('home-page') }}" class="navbar-brand">{{ $website->title }}</a>
+                @endif
                 <!-- Toggle Button-->
                 <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
             </div>

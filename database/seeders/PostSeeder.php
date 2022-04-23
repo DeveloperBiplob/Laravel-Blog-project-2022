@@ -24,7 +24,7 @@ class PostSeeder extends Seeder
                 'sub_cat_id'=> rand(1,4),
                 'name' => $slug = Str::random(5),
                 'slug' => $slug,
-                'description' => Str::random(20),
+                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, tempora! Vero ut ullam voluptatem similique deleniti mollitia in, reprehenderit amet doloremque fugiat perferendis cum maiores ad voluptatum eligendi illum sed!',
                 'image'=> 'storage/Post/default.png'
             ]);
         }

@@ -13,9 +13,10 @@ class HomeController extends Controller
     public function home()
     {
         $data = [];
-        $dtata['sliders'] = Slider::latest()->get();
-        $dtata['about'] = About::first();
-        $dtata['posts'] = Post::latest()->take(5);
+        $data['sliders'] = Slider::latest()->get();
+        $data['about'] = About::first();
+        $data['randomPosts'] = Post::latest()->inRandomOrder()->take(3)->get();
+        $data['latestPosts'] = Post::latest()->take(3)->get();
         return view('Frontend.Pages.home', $data);
     }
 
