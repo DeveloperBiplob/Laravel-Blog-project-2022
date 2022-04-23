@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="{{ asset('Frontend') }}/css/custom.css">
         <!-- Favicon-->
         <link rel="shortcut icon" href="{{ asset('Frontend') }}/favicon.png">
-
+        @stack('css')
     </head>
     <body>
     <!-- Header Section-->
@@ -46,5 +46,8 @@
         <script src="{{ asset('Frontend') }}/js/wow.min.js"></script>
         <script src="{{ asset('Frontend') }}/js/front.js"></script>
         <script src="{{ asset('Frontend') }}/js/custom.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @stack('script')
     </body>
 </html>

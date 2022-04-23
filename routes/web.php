@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubCategoryController;
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home-page');
 Route::get('/all-post', [HomeController::class, 'allPost'])->name('all-post');
 Route::get('/all-post/post-details', [HomeController::class, 'PostDetails'])->name('single-post');
+
+Route::post("/subscribe", [SubscriberController::class, 'subscriber']);
 
 Route::get('/dashboard', function () {
     return view('Frontend.Pages.dashboard');

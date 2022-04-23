@@ -89,10 +89,11 @@
                     </div>
                     <div class="col-md-8">
                         <div class="form-holder">
-                            <form action="#">
+                            <form action="#" id="subscriberForm">
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" placeholder="Type your email address">
                                     <button type="submit" class="submit">Subscribe</button>
+                                    <span id="notification"></span>
                                 </div>
                             </form>
                         </div>
@@ -123,3 +124,38 @@
         </section>
 
 @endsection
+
+@push('script')
+    <script>
+        const base_url = window.location.origin;
+
+        let subscriberForm = document.querySelector('#subscriberForm');
+        let email = document.querySelector('#email');
+        let notification = document.querySelector('#notification');
+        subscriberForm.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            if(email.value === ''){
+                notification.innerHTML = 'Plese Enter a Valid Email Address.'
+                notification.classList = 'text-danger'
+            }else{
+                notification.innerHTML = ''
+                let url = base_url + "/subscribe";
+                axios.post(url, {
+                    email: email.value
+                })
+                .then((res)=> {
+                    notification.innerHTML = 'Thanks For Subscribe.'
+                    notification.classList = 'text-success'
+                    email.value = '';
+                })
+                .catch((err)=>{
+                    if(err.response.data.errors.email){
+                        notification.innerHTML = err.response.data.errors.email[0]
+                        notification.classList = 'text-danger'
+                    }
+                })
+            }
+        })
+    </script>
+@endpush
