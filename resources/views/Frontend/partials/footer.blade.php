@@ -38,6 +38,9 @@
             </div>
             <div class="col-md-4">
                 <div class="latest-posts">
+                    @php
+                        $latestPosts = App\Models\Post::latest()->take(3)->get();
+                    @endphp
                     @foreach ($latestPosts as $latestPost)
                     <a href="#">
                         <div class="post d-flex align-items-center">

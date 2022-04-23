@@ -10,6 +10,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = ['author','category_id', 'sub_cat_id', 'name', 'slug', 'description', 'image', 'view', 'status'];
+    // protected $with = ['category', 'subCategory', 'authorData'];
 
     public function setSlugAttribute($value)
     {

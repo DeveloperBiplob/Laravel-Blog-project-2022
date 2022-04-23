@@ -1,7 +1,7 @@
 @php
     $website = App\Models\Website::first();
 @endphp
-<header class="header">
+<header class="header" style="margin-bottom: 80px">
     <!-- Main Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="search-area">
