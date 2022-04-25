@@ -32,9 +32,13 @@ class HomeController extends Controller
         return view('Frontend.Pages.all_post', $data);
     }
 
-    public function PostDetails()
+    public function PostDetails(Post $post)
     {
-        return view('Frontend.Pages.single_post');
+        $data = [];
+        $data['latestPosts'] = Post::with('authorData', 'category', 'subCategory')->latest()->take(3)->get();
+        $data['categories'] = Category::latest()->get();
+        $data['tags'] = Tag::latest()->get();
+        return view('Frontend.Pages.single_post', $data, compact('post'));
     }
 
     public function postSearch(Request $request)

@@ -35,9 +35,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="{{ route('home-page') }}" class="nav-link active ">Home</a>
                     </li>
-                    <li class="nav-item"><a href="{{ route('all-post') }}" class="nav-link ">Blog</a>
+                    <li class="nav-item"><a href="{{ route('all-post') }}" class="nav-link ">Post</a>
                     </li>
-                    <li class="nav-item"><a href="{{ route('single-post') }}" class="nav-link ">Post</a>
+                    {{-- <li class="nav-item"><a href="{{ route('single-post') }}" class="nav-link ">Post</a> --}}
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
                     </li>

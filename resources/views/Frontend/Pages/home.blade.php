@@ -26,7 +26,7 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category"><a href="#">{{ $randomPost->category->name }}</a><a href="#">{{ $randomPost->subCategory->name }}</a></div><a href="post.html">
+                                    <div class="category"><a href="#">{{ $randomPost->category->name }}</a><a href="#">{{ $randomPost->subCategory->name }}</a></div><a href="{{ route('single-post', $randomPost->slug) }}">
                                     <h2 class="h4">{{ $randomPost->name }}</h2></a>
                                 </header>
                                 <p>{!! $randomPost->description !!}</p>

@@ -15,7 +15,7 @@
                 <div class="post-meta d-flex justify-content-between">
                   <div class="date meta-last">{{ $post->created_at->format("d M | Y") }}</div>
                   <div class="category"><a href="#">{{ $post->category->name }}</a></div>
-                </div><a href="post.html">
+                </div><a href="{{ route('single-post', $post->slug) }}">
                   <h3 class="h4">{{ $post->name }}</h3></a>
                 <p class="text-muted">{{ Str::limit($post->description, 120, $end='.......') }}</p>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
