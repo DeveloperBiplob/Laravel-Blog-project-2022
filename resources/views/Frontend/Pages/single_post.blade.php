@@ -10,10 +10,10 @@
             <div class="post-thumbnail"><img src="{{ asset($post->image) }}" alt="..." class="img-fluid"></div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
-                <div class="category"><a href="#">{{ $post->category->name }}</a><a href="#">{{ $post->subCategory->name  }}</a></div>
+                <div class="category"><a href="{{ route('category-wise-post', $post->category->slug) }}">{{ $post->category->name }}</a><a href="{{ route('subCategory-wise-post', $post->subCategory->slug) }}">{{ $post->subCategory->name  }}</a></div>
               </div>
               <h1>{{ $post->name }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
-              <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+              <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="{{ route('admin-wise-post', $post->authorData->id) }}" class="author d-flex align-items-center flex-wrap">
                   <div class="avatar"><img src="{{ asset('Frontend') }}/img/avatar-1.jpg" alt="..." class="img-fluid"></div>
                   <div class="title"><span>{{ $post->authorData->name }}</span></div></a>
                 <div class="d-flex align-items-center flex-wrap">
@@ -25,7 +25,7 @@
               <div class="post-body">{!! $post->description !!}</div>
                 <div class="post-tags">
                   @foreach ($post->tags as $tag)
-                  <a href="#" class="tag">#{{ $tag->name }}</a>
+                  <a href="{{ route('tag-wise-post', $tag->slug) }}" class="tag">#{{ $tag->name }}</a>
                   @endforeach
                 </div>
               <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="#" class="prev-post text-left d-flex align-items-center">

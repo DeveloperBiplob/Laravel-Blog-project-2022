@@ -8,17 +8,17 @@
         <div class="container">
           <div class="row">
             <!-- post -->
-            @foreach ($randomPosts as $post)
+            @foreach ($posts as $post)
             <div class="post col-xl-6">
               <div class="post-thumbnail"><a href="post.html"><img src="{{ asset($post->image) }}" alt="..." class="img-fluid"></a></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
                   <div class="date meta-last">{{ $post->created_at->format("d M | Y") }}</div>
-                  <div class="category"><a href="#">{{ $post->category->name }}</a></div>
+                  <div class="category"><a href="{{ route('category-wise-post', $post->category->slug) }}">{{ $post->category->name }}</a></div>
                 </div><a href="{{ route('single-post', $post->slug) }}">
                   <h3 class="h4">{{ $post->name }}</h3></a>
                 <p class="text-muted">{{ Str::limit($post->description, 120, $end='.......') }}</p>
-                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                <footer class="post-footer d-flex align-items-center"><a href="{{ route('admin-wise-post', $post->authorData->id) }}" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar"><img src="{{ asset('Frontend') }}/img/avatar-3.jpg" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{ $post->authorData->name }}</span></div></a>
                   <div class="date"><i class="icon-clock"></i>{{ $post->created_at->diffForHumans() }}</div>

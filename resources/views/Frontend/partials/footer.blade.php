@@ -42,7 +42,7 @@
                         $latestPosts = App\Models\Post::latest()->take(3)->get();
                     @endphp
                     @foreach ($latestPosts as $latestPost)
-                    <a href="#">
+                    <a href="{{ route('single-post', $latestPost->slug) }}">
                         <div class="post d-flex align-items-center">
                             <div class="image"><img src="{{ asset($latestPost->image) }}" alt="..." class="img-fluid"></div>
                             <div class="title"><strong>{{ $latestPost->name }}</strong><span class="date last-meta">{{ $latestPost->created_at->format("M d, Y") }}</span></div>

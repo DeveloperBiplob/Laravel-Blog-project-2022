@@ -25,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home-page');
 Route::get('/all-post', [HomeController::class, 'allPost'])->name('all-post');
 Route::get('/all-post/post-details/{post}', [HomeController::class, 'PostDetails'])->name('single-post');
+Route::get('/all-post/category/post/{category}', [HomeController::class, 'categoryWisePost'])->name('category-wise-post');
+Route::get('/all-post/tag/post/{tag}', [HomeController::class, 'tagWisePost'])->name('tag-wise-post');
+Route::get('/all-post/sub-category/post/{subCategory}', [HomeController::class, 'subCategoryWisePost'])->name('subCategory-wise-post');
+Route::get('/all-post/admin/post/{admin}', [HomeController::class, 'adminWisePost'])->name('admin-wise-post');
 
 Route::post('/post/search', [HomeController::class, 'postSearch']);
 

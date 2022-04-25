@@ -26,11 +26,11 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category"><a href="#">{{ $randomPost->category->name }}</a><a href="#">{{ $randomPost->subCategory->name }}</a></div><a href="{{ route('single-post', $randomPost->slug) }}">
+                                    <div class="category"><a href="{{ route('category-wise-post', $randomPost->category->slug) }}">{{ $randomPost->category->name }}</a><a href="{{ route('subCategory-wise-post', $randomPost->subCategory->slug) }}">{{ $randomPost->subCategory->name }}</a></div><a href="{{ route('single-post', $randomPost->slug) }}">
                                     <h2 class="h4">{{ $randomPost->name }}</h2></a>
                                 </header>
                                 <p>{!! $randomPost->description !!}</p>
-                                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                                <footer class="post-footer d-flex align-items-center"><a href="{{ route('admin-wise-post', $randomPost->authorData->id) }}" class="author d-flex align-items-center flex-wrap">
                                     <div class="avatar"><img src="{{ asset('Frontend') }}/img/avatar-1.jpg" alt="..." class="img-fluid"></div>
                                     <div class="title"><span>{{ $randomPost->authorData->name }}</span></div></a>
                                     <div class="date"><i class="icon-clock"></i> {{ $randomPost->created_at->diffForHumans() }}</div>
