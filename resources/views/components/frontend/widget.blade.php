@@ -6,12 +6,16 @@
         </header>
         <form action="#" class="search-form">
         <div class="form-group">
-            <input type="search" placeholder="What are you looking for?">
+            <input type="search" id="postSearch" placeholder="What are you looking for?">
             <button type="submit" class="submit"><i class="icon-search"></i></button>
+            <span id="searchError"></span>
+            <ul id="searchList">
+
+            </ul>
         </div>
         </form>
     </div>
-    <!-- Widget [Latest Posts Widget]        -->
+    <!-- Widget [Latest Posts Widget]-->
     <div class="widget latest-posts">
         <header>
             <h3 class="h6">Latest Posts</h3>
@@ -53,3 +57,38 @@
         </ul>
     </div>
     </aside>
+
+    @push('script')
+        <script>
+            const base_path = window.location.origin;
+
+            let postSearch = document.querySelector('#postSearch');
+            let searchError = document.querySelector('#searchError');
+            let searchList = document.querySelector('#searchList');
+            postSearch.addEventListener('keyup', function(e){
+
+                let url = base_path + "/post/search";
+                let name = e.target.value;
+
+                axios.post(url, {
+                    name: name
+                })
+                .then((res)=> {
+                    // let li = null;
+                    // console.log(res)
+                    res.data.Aray.forEach(element => {
+                        console.log(element)
+                        searchList.innerHTML = `<li style="list-style: none"><a href="">${element.name}</a></li>`
+                    });
+                    // console.log(res)
+                })
+                .catch((err)=>{
+                    // if(err.response.data.errors.email){
+                    //     notification.innerHTML = err.response.data.errors.email[0]
+                    //     notification.classList = 'text-danger'
+                    // }
+                    console.log(err)
+                })
+            })
+        </script>
+    @endpush

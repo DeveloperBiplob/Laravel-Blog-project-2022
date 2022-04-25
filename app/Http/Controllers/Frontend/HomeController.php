@@ -36,4 +36,9 @@ class HomeController extends Controller
     {
         return view('Frontend.Pages.single_post');
     }
+
+    public function postSearch(Request $request)
+    {
+        return Post::where('name', 'LIKE', "%$request->name%")->take(5)->get();
+    }
 }

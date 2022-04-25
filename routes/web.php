@@ -26,6 +26,8 @@ Route::get('/', [HomeController::class, 'home'])->name('home-page');
 Route::get('/all-post', [HomeController::class, 'allPost'])->name('all-post');
 Route::get('/all-post/post-details', [HomeController::class, 'PostDetails'])->name('single-post');
 
+Route::post('/post/search', [HomeController::class, 'postSearch']);
+
 Route::post("/subscribe", [SubscriberController::class, 'subscriber']);
 
 Route::get('/dashboard', function () {
