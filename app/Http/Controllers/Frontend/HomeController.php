@@ -85,6 +85,6 @@ class HomeController extends Controller
 
     public function postSearch(Request $request)
     {
-        return Post::where('name', 'LIKE', "%$request->name%")->take(5)->get();
+        return Post::withOnly('authorData')->where('name', 'LIKE', "%$request->name%")->get(['name', 'slug', 'author']);
     }
 }

@@ -9,9 +9,11 @@
             <input type="search" id="postSearch" placeholder="What are you looking for?">
             <button type="submit" class="submit"><i class="icon-search"></i></button>
             <span id="searchError"></span>
-            <ul id="searchList">
+            <div id="searchList">
+                <ul>
 
-            </ul>
+                </ul>
+            </div>
         </div>
         </form>
     </div>
@@ -64,31 +66,42 @@
 
             let postSearch = document.querySelector('#postSearch');
             let searchError = document.querySelector('#searchError');
-            let searchList = document.querySelector('#searchList');
-            postSearch.addEventListener('keyup', function(e){
-
+            postSearch.addEventListener('keyup', async function(e){
+                e.preventDefault();
                 let url = base_path + "/post/search";
                 let name = e.target.value;
 
-                axios.post(url, {
-                    name: name
-                })
-                .then((res)=> {
-                    // let li = null;
-                    // console.log(res)
-                    res.data.Aray.forEach(element => {
-                        console.log(element)
-                        searchList.innerHTML = `<li style="list-style: none"><a href="">${element.name}</a></li>`
+                if(postSearch.value){
+                    try{
+                    let response = await axios.post(url, {
+                        name: name
                     });
-                    // console.log(res)
-                })
-                .catch((err)=>{
-                    // if(err.response.data.errors.email){
-                    //     notification.innerHTML = err.response.data.errors.email[0]
-                    //     notification.classList = 'text-danger'
-                    // }
-                    console.log(err)
-                })
+                    // console.log(response.data)
+                    displayPost(response.data);
+
+                    }catch(err){
+                        console.log(err)
+                    }finally{
+
+                    };
+
+                }
             })
+
+            const displayPost = (posts)=> {
+                        let searchList = document.querySelector('#searchList > ul');
+                        let li = null;
+
+                        if(Object.keys(posts).length === 0){
+                            li = `<li style="list-style:none;text-align:center;background:#ccc" class="p-2 text-danger">No Post Found!!</li>`;
+                        }else{
+                            li = posts.map(post => {
+                                return `<li><a href="/all-post/post-details/${post.slug}">${post.name} | ${post.author_data.name}</a></li>`;
+                            });
+                            li = li.join(" ")
+                        }
+
+                        searchList.innerHTML = li;
+                    }
         </script>
     @endpush
