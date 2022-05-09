@@ -68,7 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('about', AboutController::class);
 
 
-
+//sonme modify
 
 });
 
