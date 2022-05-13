@@ -55,6 +55,9 @@
                     <a href="#" class="btn btn-block btn-danger">
                       <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>
+                    <a href="{{ route('socailite-login', 'github') }}" class="btn btn-block btn-info">
+                      <i class="fab fa-google-plus mr-2"></i> Sign in using GitHub
+                    </a>
                   </div>
                   <!-- /.social-auth-links -->
 

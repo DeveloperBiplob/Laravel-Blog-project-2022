@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\SocailiteController;
 use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
@@ -33,6 +34,12 @@ Route::get('/all-post/admin/post/{admin}', [HomeController::class, 'adminWisePos
 Route::post('/post/search', [HomeController::class, 'postSearch']);
 
 Route::post("/subscribe", [SubscriberController::class, 'subscriber']);
+
+
+// Socailite
+Route::get('/auth/redirect/{provider}', [SocailiteController::class, 'login'])->name('socailite-login');
+Route::get('/auth/{provider}/callback', [SocailiteController::class, 'loginCallback']);
+
 
 Route::get('/dashboard', function () {
     return view('Frontend.Pages.dashboard');
