@@ -102,6 +102,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         }
     });
 
+    route::get('noting');
 
 });
 
